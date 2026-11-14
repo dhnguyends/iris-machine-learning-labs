@@ -1,0 +1,6 @@
+scikit-learn
+matplotlib
+Flask
+ipykernel
+jupyter-client
+Markdown
