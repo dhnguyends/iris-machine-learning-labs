@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Python Kernel · Iris ML Lab{% endblock %}
+{% block content %}
+<div class="page-heading compact-heading">
+  <p class="eyebrow accent">PAGE 04 / LEARN BY RUNNING</p>
+  <h1>Your Python <span class="text-accent">notebook.</span></h1>
+  <p class="hero-copy">Run each cell in order. Variables stay in the Python kernel between cells, just like a notebook. Edit code to experiment.</p>
+</div>
+<div class="kernel-toolbar">
+  <span><span class="status-dot"></span> Python 3 kernel starts on first run</span>
+  <button class="button secondary-button" id="reset-kernel" type="button">Reset kernel</button>
+</div>
+<div class="kernel-notice" id="kernel-notice" role="status" aria-live="polite"></div>
+<div class="interactive-cells">
+  {% for cell in code_cells %}
+    <article class="interactive-cell">
+      <div class="cell-description">{{ cell.description|safe }}</div>
+      <div class="cell-header"><span class="cell-prompt">IN [{{ loop.index }}]</span><button class="run-cell" type="button">Run cell <span aria-hidden="true">▶</span></button></div>
+      <textarea class="cell-editor" aria-label="Python code cell {{ loop.index }}" spellcheck="false" rows="{{ cell.rows }}">{{ cell.source }}</textarea>
+      <div class="cell-output" aria-live="polite"><span class="output-placeholder">Run this cell to see its output.</span></div>
+    </article>
+  {% endfor %}
+</div>
+<script src="{{ url_for('static', filename='kernel.js') }}" defer></script>
+{% endblock %}

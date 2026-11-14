@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Notebook HTML · Iris ML Lab{% endblock %}
+{% block content %}
+<div class="page-heading compact-heading">
+  <p class="eyebrow accent">PAGE 03 / READ THE NOTEBOOK</p>
+  <h1>The notebook, <span class="text-accent">in HTML.</span></h1>
+  <p class="hero-copy">A read-only, browser-friendly rendering of the project notebook. To execute cells interactively, open the Python kernel page.</p>
+  <a class="button secondary-button" href="{{ url_for('kernel_page') }}">Open interactive notebook <span aria-hidden="true">→</span></a>
+</div>
+<div class="notebook-view">
+  {% for cell in cells %}
+    {% if cell.kind == "markdown" %}
+      <article class="markdown-cell">{{ cell.html|safe }}</article>
+    {% else %}
+      <div class="static-code-cell"><div class="cell-prompt">IN [ ]</div><pre><code>{{ cell.source }}</code></pre></div>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endblock %}
